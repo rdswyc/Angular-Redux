@@ -1,4 +1,6 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+
+import { State } from './types';
 
 
 
@@ -10,4 +12,13 @@ import { NgModule } from '@angular/core';
   exports: [
   ]
 })
-export class AngularReduxModule { }
+export class AngularReduxModule {
+  static forRoot(state: State): ModuleWithProviders<AngularReduxModule> {
+    return {
+      ngModule: AngularReduxModule,
+      providers: [
+        { provide: State, useValue: state }
+      ]
+    };
+  }
+}
