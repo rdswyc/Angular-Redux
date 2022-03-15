@@ -29,12 +29,18 @@ export type Reducer<S = State, P = S, M = undefined> = (
   action: Action<P, M>
 ) => S;
 
+export class StoreParameters {
+  initialState: State;
+  effects: EffectMap;
+  reducer: Reducer<State, any>;
+}
+
 
 export type Selector<T> = (state: State) => T;
 export type Projector<S, P> = (selected: S) => P;
 export interface SelectorCreator<S, P = S> {
   selector: Selector<S>;
-  projector?: Projector<S, P>;
+  projector: Projector<S, P>;
 }
 
 export function createSelector<S>(selector: Selector<S>): SelectorCreator<S>;
